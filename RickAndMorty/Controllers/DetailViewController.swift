@@ -57,7 +57,7 @@ final class DetailViewController: ViewController {
     }
     
     private func updateDetailsWith(_ object: CharacterObject) {
-        let string = """
+        let stringInfo = """
         Name: \(object.name)
         Status: \(object.status.rawValue)
         Species: \(object.species)
@@ -65,7 +65,7 @@ final class DetailViewController: ViewController {
         Origin: \(object.origin.name)
         Location: \(object.location.name)
         """
-        infoLabel.text = string
+        infoLabel.text = stringInfo
         imageView.imageURLString = object.image
     }
 }

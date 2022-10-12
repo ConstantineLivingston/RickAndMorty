@@ -88,14 +88,19 @@ extension CharactersViewController {
     }
     
     private func setItemSizeForCollectionView(layout: UICollectionViewLayout, with size: CGSize) {
-        let layout = layout as? UICollectionViewFlowLayout
+        guard let layout = layout as? UICollectionViewFlowLayout else { return }
+        
+        var numberOfElementsHorizontally: CGFloat
+        
         if UIDevice.current.orientation.isPortrait {
-            layout?.itemSize = CGSize(width: size.width / 2 - 1,
-                                     height: size.width / 2 - 1)
+            numberOfElementsHorizontally = 2
+            layout.itemSize = CGSize(width: size.width / numberOfElementsHorizontally,
+                                     height: size.width / numberOfElementsHorizontally)
         }
         if UIDevice.current.orientation.isLandscape {
-            layout?.itemSize = CGSize(width: size.width / 5 - 1,
-                                     height: size.width / 5 - 1)
+            numberOfElementsHorizontally = 5
+            layout.itemSize = CGSize(width: size.width / numberOfElementsHorizontally,
+                                     height: size.width / numberOfElementsHorizontally)
         }
     }
     
@@ -105,8 +110,8 @@ extension CharactersViewController {
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
         setItemSizeForCollectionView(layout: layout, with: CGSize(width: width, height: height))
-        layout.minimumInteritemSpacing = 2
-        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         layout.scrollDirection = .vertical
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
